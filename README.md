@@ -1,21 +1,9 @@
-# GptRoulette
+This place is a message... and part of a system of messages... pay attention to it!
 
-**TODO: Add description**
+Sending this message was important to us. We considered ourselves to be a powerful culture.
 
-## Installation
+This place is not a place of honor... no highly esteemed deed is commemorated here... nothing valued is here.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `gpt_roulette` to your list of dependencies in `mix.exs`:
+What is here was dangerous and repulsive to us. This message is a warning about danger.
 
-```elixir
-def deps do
-  [
-    {:gpt_roulette, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/gpt_roulette>.
-
+The danger is still present, in your time, as it was in ours. 
