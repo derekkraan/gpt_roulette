@@ -3,29 +3,40 @@ defmodule GptRoulette do
   Sigil CHATGPT library for interacting with the OpenAI GPT-3 API.
   """
 
-  @base_url "https://api.openai.com"
-  @api_key Application.compile_env(:chat_gpt, :api_key)
-
-  defmacro sigil_CHATGPT(string, []) do
-    compile_suggestion(String.to_char_list(string))
+  defmacro sigil_CHATGPT({:<<>>, _meta, [prompt]}, _extra) do
+    compile_suggestion(prompt)
+    |> Code.string_to_quoted!()
   end
 
   defp compile_suggestion(prompt) do
-    {:ok, response} = HTTPoison.post(
-      "#{@base_url}/v1/engines/davinci-codex/completions",
-      %{
-        "prompt" => prompt,
-        "max_tokens" => 100,
-        "temperature" => 0.7
-      },
-      headers: [
-        {"Authorization", "Bearer #{@api_key}"},
-        {"Content-Type", "application/json"}
-      ]
-    )
+    llm =
+      LangChain.ChatModels.ChatOpenAI.new!(%{
+        stream: false,
+        model: "gpt-4"
+      })
 
-    result = Jason.decode!(response.body)
-    suggestion = result["choices"][0]["text"]
-    String.to_existing_atom(suggestion)
+    messages = [
+      LangChain.Message.new_system!("""
+        Return only plaintext Elixir code. Omit any markdown syntax. Remove any markdown syntax. The code should compile on its own.
+
+        You are a computer programmer, typing Elixir Code into your text editor. The module has already been defined. The next message will contain a plain text description of the function to be defined. Return _only_ the text that you will enter into your program.
+      """),
+      LangChain.Message.new_user!(prompt)
+    ]
+
+    chain =
+      LangChain.Chains.LLMChain.new!(%{llm: llm, verbose: false})
+      |> LangChain.Chains.LLMChain.add_messages(messages)
+
+    {:ok, _chain, %{content: elixir_code}} =
+      chain |> LangChain.Chains.LLMChain.run()
+
+    case elixir_code do
+      "```elixir" <> rest ->
+        String.replace_trailing(rest, "```", "")
+
+      code ->
+        code
+    end
   end
 end
