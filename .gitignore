@@ -24,3 +24,5 @@ gpt_roulette-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+.envrc
