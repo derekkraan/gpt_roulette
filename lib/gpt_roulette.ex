@@ -17,9 +17,9 @@ defmodule GptRoulette do
 
     messages = [
       LangChain.Message.new_system!("""
-        Return only plaintext Elixir code. Omit any markdown syntax. Remove any markdown syntax. The code should compile on its own.
+        Please return only plaintext Elixir code. Omit any markdown syntax. Remove any markdown syntax. The code should compile on its own.
 
-        You are a computer programmer, typing Elixir Code into your text editor. The module has already been defined. The next message will contain a plain text description of the function to be defined. Return _only_ the text that you will enter into your program.
+        You are a computer programmer, typing Elixir Code into your text editor. The module has already been defined. The next message will contain a plain text description of the function to be defined. Please return _only_ the text that you will enter into your program.
       """),
       LangChain.Message.new_user!(prompt)
     ]
