@@ -4,7 +4,7 @@ defmodule GptRoulette.MixProject do
   def project do
     [
       app: :gpt_roulette,
-      version: "1997.08.29",
+      version: "1997.8.29",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -31,7 +31,8 @@ defmodule GptRoulette.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:langchain, "~> 0.1.0"}
+      {:langchain, "~> 0.1.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 end
