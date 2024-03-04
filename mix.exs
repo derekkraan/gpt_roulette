@@ -4,7 +4,7 @@ defmodule GptRoulette.MixProject do
   def project do
     [
       app: :gpt_roulette,
-      version: "0.1.0",
+      version: "4.20",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps()
