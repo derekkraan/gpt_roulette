@@ -4,10 +4,11 @@ defmodule GptRoulette.MixProject do
   def project do
     [
       app: :gpt_roulette,
-      version: "4.20",
+      version: "1997.08.29",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -15,6 +16,15 @@ defmodule GptRoulette.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  defp package() do
+    [
+      description: "for AI Maximalists only",
+      licenses: ["MIT"],
+      maintainers: ["Derek Kraan"],
+      links: %{GitHub: "https://github.com/derekkraan/gpt_roulette"}
     ]
   end
 
